@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="/src/assets/bulma.min.css" rel="stylesheet" />
+    <link href="/src/assets/fontawesome/css/fontawesome.min.css" rel="stylesheet">
+    <link href="/src/assets/fontawesome/css/light.min.css" rel="stylesheet">
+    <title>Churge</title>
+    <style>
+        html {
+            overflow: auto;
+        }
+        img.small-map {
+            width: 15rem;
+            border: 0.5rem solid rgb(184, 191, 231);
+        }
+        img.map {
+            width: auto;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="modal" id="imgmodal">
+        <div class="modal-background"></div>
+        <div class="modal-content">
+            <p class="image">
+                <img src="map.png" class="map">
+            </p>
+        </div>
+        <button class="modal-close is-large" aria-label="close"></button>
+    </div>
+    <section class="hero is-dark">
+        <div class="hero-body">
+            <div>
+                <p class="title has-text-centered">
+                    <span class="icon"><i class="fa-light fa-church fa-lg"></i></span>
+                </p>
+                <p class="title has-text-centered">Церковь ЕХБ в городе Новый Уренгой</p>
+                <p class="subtitle has-text-centered">
+                    Информационная страница местной религиозной организации евангельских христиан-баптистов. 
+                </p>
+                <div class="content">
+                    <div class="tile is-ancestor">
+                      <div class="tile is-parent">
+                        <div class="tile is-child">
+                            <h4 class="title">Проведение богослужений!</h4> 
+                            <p><span class="icon"><i class="fa-sharp fa-light fa-calendar"></i></span> Воскресенье
+                                <br><span class="icon"><i class="fa-light fa-clock"></i></span> 11:00
+                                <br><a class="has-text-warning" href="https://yandex.ru/maps/-/C-c8AnB" title="Открыть в Яндекс картах">
+                                    <span class="icon"><i class="fa-sharp fa-light fa-location-plus"></i></span>Тундровая улица, 33
+                                </a>
+                                <img class="image small-map js-modal-trigger" data-target="imgmodal" src="map.png"/>
+                            </p>
+                            <p>
+                                <span class="icon"><i class="fa-light fa-at"></i></span>
+                                <span>info@exb89.ru</span>
+                            </p>
+                        </div>
+                      </div>
+                      
+                      <div class="tile is-parent">
+                        <div class="tile is-child">
+                            <h4 class="title">Пресвитеры</h4>
+                            <ol>
+                                <li>Николай Витальевич Криворучко</li>
+                                <li>Тарас Алексеевич Ткаченко</li>
+                                <li>Юрий Дмитриевич Чибук</li>
+                            </ol>
+                        </div>
+                      </div>
+                      <div class="tile is-parent">
+                        <div class="tile is-child">
+                            <h4 class="title">Символ веры</h4>
+                            <p>Символ веры, информация о конфессии и история соответствует материалам, опубликованным на сайте 
+                                <a class="has-text-warning" href="https://baptist.org.ru/" target="_blank">РОССИЙСКОГО СОЮЗА ЕХБ</a>.
+                            </p>
+                        </div>
+                      </div>  
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <p class="footer content is-small">&copy; Местная религиозная организация Объединения ЕХБ Ямало-Ненецкого автономного округа в г. Новый Уренгой, 2023 г.  </p>
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+  // Functions to open and close a modal
+  function openModal($el) {
+    $el.classList.add('is-active');
+  }
+
+  function closeModal($el) {
+    $el.classList.remove('is-active');
+  }
+
+  function closeAllModals() {
+    (document.querySelectorAll('.modal') || []).forEach(($modal) => {
+      closeModal($modal);
+    });
+  }
+
+  // Add a click event on buttons to open a specific modal
+  (document.querySelectorAll('.js-modal-trigger') || []).forEach(($trigger) => {
+    const modal = $trigger.dataset.target;
+    const $target = document.getElementById(modal);
+
+    $trigger.addEventListener('click', () => {
+      openModal($target);
+    });
+  });
+
+  // Add a click event on various child elements to close the parent modal
+  (document.querySelectorAll('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button') || []).forEach(($close) => {
+    const $target = $close.closest('.modal');
+
+    $close.addEventListener('click', () => {
+      closeModal($target);
+    });
+  });
+
+  // Add a keyboard event to close all modals
+  document.addEventListener('keydown', (event) => {
+    if (event.code === 'Escape') {
+      closeAllModals();
+    }
+  });
+});
+</script>
+  </body>
+</html>

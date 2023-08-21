@@ -3,9 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="/src/assets/bulma.min.css" rel="stylesheet" />
-    <link href="/src/assets/fontawesome/css/fontawesome.min.css" rel="stylesheet">
-    <link href="/src/assets/fontawesome/css/light.min.css" rel="stylesheet">
+    {% load static %}
+    <link href="{% static 'index/bulma.min.css' %}" rel="stylesheet" />
+    <link href="{% static '/index/fontawesome/css/fontawesome.min.css' %}" rel="stylesheet">
+    <link href="{% static '/index/fontawesome/css/light.min.css' %}" rel="stylesheet">
     <title>Churge</title>
     <style>
         html {
@@ -18,6 +19,11 @@
         img.map {
             width: auto;
         }
+        div.tile.is-child {
+            border: 1px dotted white;
+            padding: 1rem;
+            border-radius: 1rem;
+        }
     </style>
   </head>
   <body>
@@ -25,7 +31,7 @@
         <div class="modal-background"></div>
         <div class="modal-content">
             <p class="image">
-                <img src="map.png" class="map">
+                <img src="{% static 'index/map.png' %}" class="map">
             </p>
         </div>
         <button class="modal-close is-large" aria-label="close"></button>

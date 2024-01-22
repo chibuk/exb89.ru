@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Range-selector тестовое</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color:#444;
+        }
+        .content {
+            width: 398px;
+            height: 266px;
+            background-color: #1F1F1F;
+            position: relative;
+        }
+        :root {
+            --top: 121px;
+            --left: 105px;
+            --width: 188px;
+            --height: 12px;
+            --sel: 0;
+        }
+        .background {
+            position: absolute;
+            top: var(--top);
+            left: var(--left);
+            height: var(--height);
+            width: var(--width);
+            height: var(--height);
+            border-radius: 6px;
+            background: #FFECBB;
+            /* z-index: 2; */
+        }
+        .fill {
+            --rc: 10%;
+            --lc: 10%;
+            position: absolute;
+            top: var(--top);
+            left: var(--left);
+            width: var(--width);
+            height: var(--height);
+            border-radius: 6px;
+            background: #FDC840;
+            clip-path: inset(0 var(--lc) 0 var(--rc));
+        }
+        input[type=range] {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background: transparent;
+            cursor: pointer;
+            width: 200px;
+            outline: none;
+            position: absolute;
+            top: var(--top);
+            left: 99px;
+            pointer-events: none;
+            z-index: calc(1 + var(--sel, 0));
+            /* overflow: hidden; */
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            background: #FFFFFF;
+            width: 24px;
+            height: 24px;
+            border-radius: 12px;
+            margin-top: -8.5px;
+            pointer-events: auto;
+        }
+        input[type=range]::-moz-range-track {
+            border-radius: 6px;
+            height: 24px;
+            background: transparent;
+        }
+        input[type=range]::-moz-range-thumb {
+            border: none;
+            background: #FFFFFF;
+            width: 24px;
+            height: 24px;
+            border-radius: 12px;
+            pointer-events: auto;
+            transform: translate(0, -3.5px);
+        }
+        input[type="range"]::-webkit-slider-runnable-track {
+            border-radius: 6px;
+            height: 24px;
+            background: transparent;
+        }
+        .label {
+            position: absolute;
+            width: 54px;
+            height: 23px;
+            background: #6A6A6A;
+            top: 65px;
+            color: #fff;
+            border-radius: 5px;
+            font-family: Inter;
+            font-size: 12px;
+            font-weight: 400;
+            line-height: 15px;
+            border: none;
+            text-align: center;
+        }
+        .label:focus {
+            outline: #1F1F1F;
+        }
+        .label_l {
+            left: 104px;
+        }
+        .label_r {
+            left: 238px;
+        }
+        [type=range]:focus, [type=range]:hover {
+            --sel: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="content" data-maximum="1000">
+        <div class="background"></div>
+        <div class="fill"></div>
+        <input id="a" class="range" type="range" min="0" max="100" step="0.1" value="10" name="a">
+        <input id="b" class="range" type="range" min="0" max="100" step="0.1" value="90" name="b">
+        <input class="label label_l"></input>
+        <input class="label label_r"></input>
+    </div>
+    
+    <script>
+        let element_a = document.querySelector('#a'); // значения от 0 до 100 - size
+        let element_b = document.querySelector('#b'); // значения от size до 100
+        let label_l = document.querySelector('.label_l');
+        let label_r = document.querySelector('.label_r');
+        let fill = document.querySelector(".fill");
+        let maximum = 100;
+        const size = 13;
+        function set_label () {
+            label_r.value = maxToLabel_b(element_b.valueAsNumber) + ' ₽';
+            label_l.value = maxToLabel_a(element_a.valueAsNumber) + ' ₽';
+        }
+        
+        function moveing () {
+            fill.style.setProperty("--lc", `${100 - element_b.valueAsNumber}%`);
+            fill.style.setProperty("--rc", `${element_a.valueAsNumber}%`);
+        }
+
+        function move_a () {
+            if (element_a.valueAsNumber>(element_b.valueAsNumber - size)) element_b.value = element_a.valueAsNumber + size;
+            element_a.value = Math.min((100 - size), element_a.valueAsNumber);
+            moveing();
+            set_label();
+        }
+
+        function move_b () {
+            if (element_a.valueAsNumber>(element_b.valueAsNumber - size)) element_a.value = element_b.valueAsNumber - size;
+            element_b.value = Math.max(size, element_b.valueAsNumber);
+            moveing();
+            set_label();
+        }
+        
+        element_a.addEventListener("input", ()=>move_a());
+        element_b.addEventListener("input", ()=>move_b());
+        
+        function init () {
+            maximum = parseInt(document.querySelector('.content').dataset.maximum);
+            element_a.value = element_a.getAttribute('value');
+            element_b.value = element_b.getAttribute('value');
+            moveing();
+            set_label();
+        } init();
+        /** Получаем float от ползунка (0-100, шаг 0.1) 
+         * и преобразуем в число для диапазона 0 - maximum, шаг 1 */
+        function maxToLabel_a (_float) {    // *10 = int(0-880) if size=12
+            _float = _float*10;
+            return Math.round(maximum/((100-size)*10)*_float);
+        }
+        function maxToLabel_b (_float) {    // *10 = int(120-1000) if size=12
+            _float = parseInt((_float-size)*10);
+            return Math.round(maximum/((100-size)*10)*_float);
+        }
+        function labelToMax_a (_int) {  // 0...(100-size)
+            return _int*(100-size)/maximum;
+        }
+        function labelToMax_b (_int) {  // size...100
+            return _int*(100-size)/maximum+size;
+        }
+
+        label_r.addEventListener('input', function() {
+            element_b.value = labelToMax_b(inputToInt(label_r.value));
+            if (element_a.valueAsNumber>(element_b.valueAsNumber - size)) element_b.value = element_a.valueAsNumber + size;
+            element_a.value = Math.min((100 - size), element_a.valueAsNumber);
+            moveing();
+        });
+        label_l.addEventListener('input', function() {
+            element_a.value = labelToMax_a(inputToInt(label_l.value));
+            if (element_a.valueAsNumber>(element_b.valueAsNumber - size)) element_a.value = element_b.valueAsNumber - size;
+            element_b.value = Math.max(size, element_b.valueAsNumber);
+            moveing();
+        });
+        label_l.addEventListener('blur', function() {
+            set_label();
+        });
+        label_r.addEventListener('blur', function() {
+            set_label();
+        });
+
+    /**
+     * Преобразование строки из Input'а в число Int для вычислений.
+     * Оставляем цифры.
+     * если будет NaN, то вернет ноль.
+     * @param str
+     */
+    function inputToInt(str) {
+        let _int = parseInt(str.replace(/\s/g, ''));
+        return isNaN(_int) ? 0 : _int // это исключает появление надписи "не число"
+    }
+    /**
+     * После вычислений, "денежный" Int форматируем в "денежную" строку
+     * @param _int
+     */
+    function intToInput(_int) {
+        return (_int==0) ? ' ₽' : new Intl.NumberFormat('ru-RU', { minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(_int) + ' ₽';
+    }
+    </script>
+</body>
+</html>

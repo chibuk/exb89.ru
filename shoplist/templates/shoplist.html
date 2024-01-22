@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% load static %}
+    <!-- <link href="{% static 'index/bulma.min.css' %}" rel="stylesheet" /> -->
+    <link href="{% static '/index/fontawesome/css/fontawesome.min.css' %}" rel="stylesheet">
+    <link href="{% static '/index/fontawesome/css/light.min.css' %}" rel="stylesheet">
+    <link href="{% static 'shoplist.css' %}" rel="stylesheet">
+    <title>Список покупок</title>
+</head>
+<body>
+  <div class="flex-container">
+    <div class="flex-container-child">
+      <h1>Список покупок</h1>
+      <form action="" name="createitem">
+        <div class="input-out">
+          <label class="input-placeholder" for="i-1">Введите наименование: </label>
+          <input id='i-1' type="text" class="input-min" name="name" />
+          <button class="button" type="submit"><i class="fa-light fa-plus fa-2xl"></i></button>
+        </div>
+        <div class="buttons">
+          <button data-filter="name"><i class="fa-light fa-filter-list fa-xl"></i></button>
+          <button data-sort="-id"><i class="fa-light fa-arrow-down-1-9 fa-xl"></i></button>
+          <button data-sort="id"><i class="fa-light fa-arrow-up-9-1 fa-xl"></i></button>
+          <button data-sort="-name"><i class="fa-light fa-arrow-down-a-z fa-xl"></i></button>
+          <button data-sort="name"><i class="fa-light fa-arrow-up-z-a fa-xl"></i></button>
+        </div>
+      </form>
+      <div id="content"></div>
+    </div>
+    
+    <div class="flex-container-child">
+      <h1>Куплено</h1>
+      <div id="done-content"></div>
+    </div>
+  </div>
+  <script src="{% static 'shoplist.js' %}"></script>
+</body>
+</html>

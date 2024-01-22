@@ -1,0 +1,145 @@
+.flex-container {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: baseline;
+  justify-content: center;
+  max-width: 65rem;
+  margin-left: auto;
+  margin-right: auto;
+  background-color:ghostwhite;
+  box-shadow: 0px 0px 5px 0px grey;
+}
+.flex-container-child {
+  min-width: 20rem;
+  max-width: 30rem;
+  margin: .5rem;
+}
+h1 {
+  font: bold 1.3rem "Tahoma", sans-serif;
+  color: gray;
+  padding: 0 .5rem;
+  text-align: center;
+}
+.input-out {
+  margin: 1rem 0 .5rem;
+  display: block;
+  background-color: white;
+  position: relative;
+}
+.input-placeholder {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: .9rem;
+  color:  #666;
+  position: absolute;
+  padding: .1rem 0 0 .6rem;
+}
+input.input-min {
+  font-size: 1rem;
+  border: 1px solid #999;
+  border-radius: .3rem;
+  width: -webkit-fill-available;
+  width: -moz-available;
+  height: 1.6rem;
+  padding: 1rem .3rem 0 .5rem;
+  transition: box-shadow 400ms 100ms, border-color 400ms 100ms;
+  -webkit-transition: box-shadow 400ms 100ms, border-color 400ms 100ms;
+}
+input.input-min:focus {
+  outline: none;
+  border-color: transparent;
+  box-shadow: 0 0 .3rem 1px #008b8b;
+}
+.button {
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: .3rem;
+  border: none;
+  color: #008b8b;
+  background-color: white;
+  position: absolute;
+  top: .2rem;
+  right: .2rem;
+}
+.button:hover, .button:focus {
+  background-color: #008b8b;
+  transition: all 400ms 50ms;
+  color: white;
+  outline: none;
+  cursor: pointer;
+}
+.item {
+  color:#666;
+  box-shadow: 0px 0px 3px 0px darkcyan;
+  border-radius: .5rem;
+  padding: .5rem 3.5rem .5rem .3rem;
+  display: block;
+  cursor: pointer;
+  margin-top: .7rem;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  position: relative;
+}
+.item span {
+  margin: 0 .3rem;
+}
+.item button {
+  width: 2rem;
+  height: 1.3rem;
+  position: absolute;
+  top: .5rem;
+  background-color: transparent;
+  border: none;
+}
+.item button:hover, .item button:focus {
+  transition: color 300ms 40ms;
+}
+.item button.btn-del:hover {
+  color: #d2691e;
+}
+.item button.btn-edt:hover {
+  color: #005b5b;
+}
+.item button.btn-del {
+  right: 0;
+  color: #d2691e99;
+}
+.item button.btn-edt {
+  color: #005b5b99;
+}
+
+.item:hover {
+  box-shadow: 0px 0px 7px 0px #008b8b;
+  color: #005b5b;
+  transition: all 400ms 50ms;
+}
+.checkbox {
+  accent-color: #008b8b;
+}
+div#done-content .item{
+  box-shadow: 0px 0px 3px 0px gray;
+}
+div#done-content .item input.checkbox {
+  accent-color: gray;
+}
+#content, #done-content {
+  max-height: 80vh;
+  overflow-y: auto;
+  padding: .1rem .5rem .3rem;
+}
+form[name=createitem]{
+  padding: 0 .5rem;
+}
+.buttons button {
+  width: 3.5rem;
+  height: 2rem;
+  border-radius: .3rem;
+  border: 1px solid #008b8b;
+  color: #008b8b;
+  background-color: white;
+  cursor: pointer;
+}
+.buttons button:hover, .buttons button:focus {
+  background-color: #005b5b10;
+  color: #005b5b;
+  transition: background-color 300ms 50ms, color 300ms 50ms;
+  outline: none;
+}

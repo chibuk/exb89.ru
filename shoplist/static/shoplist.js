@@ -108,7 +108,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const _form = e.currentTarget;
     let method = 'post';
     let _url = url;
-    let id = _form.name.dataset.id
+    let id = _form.name.dataset.id;
     if (id) {
       method = 'patch';
       _url = url + '/' + id;
@@ -119,7 +119,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       method: method,
       headers: { "Content-Type": "application/json",},
       body: JSON.stringify(data),
-    })
+    });
     if (addresp.ok) {
       if (id) {
         let _name = await addresp.json();
@@ -131,7 +131,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       icon.classList.remove('fa-pen');
       icon.classList.add('fa-plus');
     }
-  })
+  });
 
   // сортировка (o=id|-id, o=name|-name) и фильтрация (name=<query>)
   document.querySelectorAll('div.buttons button').forEach(button => {

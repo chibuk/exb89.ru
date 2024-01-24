@@ -65,23 +65,6 @@ function edit (button) {
     });
 }
 
-function setHandlers() {
-  // обработчик щелчка на задаче
-  document.querySelectorAll('label.item input').forEach(item => {
-    done(item);
-  });
-
-  // хендлер удаления
-  document.querySelectorAll('button.btn-del').forEach(button => {
-    deleteHandler(button);
-  });
-
-  // редактирование
-  document.querySelectorAll('button.btn-edt').forEach(button => {
-    edit(button);
-  });
-}
-
 let params = new URLSearchParams(); // Для фильтра и сортировки
 // Заполнение списка покупок
 async function list () {
@@ -91,7 +74,6 @@ async function list () {
     if (item.isdone) addItem(item, done_content);
     else addItem(item, content);
   }
-  setHandlers();
 }
 
 document.addEventListener("DOMContentLoaded", async () => {

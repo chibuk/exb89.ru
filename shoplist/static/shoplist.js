@@ -143,7 +143,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   })
 
   // сортировка (o=id|-id, o=name|-name) и фильтрация (name=<query>)
-  document.querySelectorAll('form[nmae="createitem"] div.buttons button').forEach(button => {
+  document.querySelectorAll('form[name="createitem"] div.buttons button').forEach(button => {
     button.addEventListener('click', async (e)=>{
       e.preventDefault();
       const button = e.currentTarget;

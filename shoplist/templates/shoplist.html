@@ -17,15 +17,15 @@
       <form action="" name="createitem">
         <div class="input-out">
           <label class="input-placeholder" for="i-1">Введите наименование: </label>
-          <input id='i-1' type="text" class="input-min" name="name" />
+          <input id='i-1' type="text" class="input-min" name="name" autocomplete="off" />
           <button class="button" type="submit"><i class="fa-light fa-plus fa-2xl"></i></button>
         </div>
         <div class="buttons">
-          <button data-filter="name"><i class="fa-light fa-filter-list fa-xl"></i></button>
-          <button data-sort="-id"><i class="fa-light fa-arrow-down-1-9 fa-xl"></i></button>
-          <button data-sort="id"><i class="fa-light fa-arrow-up-9-1 fa-xl"></i></button>
-          <button data-sort="-name"><i class="fa-light fa-arrow-down-a-z fa-xl"></i></button>
-          <button data-sort="name"><i class="fa-light fa-arrow-up-z-a fa-xl"></i></button>
+          <button data-filter="name" title="Фильтр"><i class="fa-light fa-filter-list fa-xl"></i></button>
+          <button data-sort="-id" title="Сорировка по дате"><i class="fa-light fa-arrow-down-1-9 fa-xl"></i></button>
+          <button data-sort="id" title="Сорировка по дате"><i class="fa-light fa-arrow-up-9-1 fa-xl"></i></button>
+          <button data-sort="-name" title="Сорировка"><i class="fa-light fa-arrow-down-a-z fa-xl"></i></button>
+          <button data-sort="name" title="Сорировка"><i class="fa-light fa-arrow-up-z-a fa-xl"></i></button>
         </div>
       </form>
       <div id="content"></div>
@@ -33,7 +33,17 @@
     
     <div class="flex-container-child">
       <h1>Куплено</h1>
-      <div id="done-content"></div>
+      <form action="" name="deleted-items">
+        <div class="buttons">
+          <button type="submit" title="Обновить список" onclick="document.location.reload()">
+            <i class="fa-light fa-arrows-repeat fa-xl"></i>
+          </button>
+          <button id="delete-items" title="Удалить отмеченные">
+            <i class="fa-light fa-trash-check fa-xl"></i>
+          </button>
+        </div>
+        <div id="done-content"></div>
+      </form>
     </div>
   </div>
   <script defer src="{% static 'shoplist.js' %}"></script>

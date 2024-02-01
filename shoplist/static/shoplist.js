@@ -22,8 +22,9 @@ function createTag (tag, attrs={}) {
  */
 function addItem (item, content) {
   // create elements
-  const label = createTag('label', {class: 'item', for: item.id, title: "Создано " + item.created}); // TODO: формат даты
-  const input = createTag('input', {class: 'checkbox', type: 'checkbox', id: item.id});
+  const label = createTag('label', {class: 'item', for: item.id, title: "Создано " + 
+    (new Date(item.created).toLocaleString("ru-RU"))}); // TODO: формат даты
+  const input = createTag('input', {class: 'checkbox', type: 'checkbox', id: item.id, name: item.id});
   input.checked = item.isdone;  // state from database
   const span = createTag('span');
   span.innerText = item.name;   // visible text
@@ -44,9 +45,6 @@ function addItem (item, content) {
   content.prepend(label);
 }
 
-let content = undefined;
-let done_content = undefined;
-
 // Установка обработчика клик на элементе списка (выполнена)
 function doneHandler(item) {
   item.addEventListener('click', async (e)=>{
@@ -62,7 +60,7 @@ function doneHandler(item) {
 function deleteHandler(button) {
   button.addEventListener('click', async (e)=>{
       const _label = e.currentTarget.parentNode;
-      const delresp = await fetch(url + '/' + _label.getAttribute('for'), {method: 'delete'});
+      const delresp = await fetch(url + '/' + _label.getAttribute('for'), {method: 'DELETE'});
       if (delresp.ok) _label.remove();
     });
 }
@@ -79,26 +77,9 @@ function editHandler (button) {
     });
 }
 
-// function setHandlers() {
-//   // обработчик щелчка на задаче
-//   document.querySelectorAll('label.item input').forEach(item => {
-//     doneHandler(item);
-//   });
-
-//   // хендлер удаления
-//   document.querySelectorAll('button.btn-del').forEach(button => {
-//     deleteHandler(button);
-//   });
-
-//   // редактирование
-//   document.querySelectorAll('button.btn-edt').forEach(button => {
-//     editHandler(button);
-//   });
-// }
-
 let params = new URLSearchParams(); // Для фильтра и сортировки
 // Заполнение списка покупок
-async function list () {
+async function list (content, done_content) {
   const _url = (params.toString()) ? url + '?' + params.toString() : url;
   const resp = await fetch(_url).then((x) => x.json());
   for(let item of resp) {
@@ -109,17 +90,19 @@ async function list () {
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
-  content = document.getElementById('content');   // тут будет список
-  done_content = document.getElementById('done-content'); // контейнер выполненных покупок
+  const content = document.getElementById('content');   // тут будет список
+  const done_content = document.getElementById('done-content'); // контейнер выполненных покупок
   document.forms['createitem'].name.value = ''; // очистка
   document.forms['createitem'].name.focus();  // сразу фокус
 
   // Заполнение списка покупок
-  await list();
+  await list(content, done_content);
 
   // Обработчик создания задачи (или редактирования, если есть dataset.id)
   document.forms['createitem'].addEventListener('submit', async (e)=>{
+    e.preventDefault();
     const _form = e.currentTarget;
+    if (!_form.name.value) return;  // если пустое поле ввода
     let method = 'POST';
     let _url = url;
     let id = _form.name.dataset.id;
@@ -127,7 +110,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       method = 'PATCH';
       _url = url + '/' + id;
     }
-    e.preventDefault();
     const data = {name: _form.name.value};
     const addresp = await fetch(_url, {
       method: method,
@@ -146,20 +128,53 @@ document.addEventListener("DOMContentLoaded", async () => {
       icon.classList.add('fa-plus');
     }
   });
+  // Отмена ввода по клавише ESC
+  document.getElementById('i-1').addEventListener('keydown', (e)=>{
+    const _input = e.currentTarget;
+    if (e.code == "Escape") {
+      _input.value = '';
+      if (_input.dataset.id) {
+        _input.dataset.id = '';
+        const icon = _input.form.querySelector('button.button[type=submit] i');
+        icon.classList.remove('fa-pen');
+        icon.classList.add('fa-plus');
+      }
+    }
+  })
 
   // сортировка (o=id|-id, o=name|-name) и фильтрация (name=<query>)
-  document.querySelectorAll('div.buttons button').forEach(button => {
+  document.querySelectorAll('form[nmae="createitem"] div.buttons button').forEach(button => {
     button.addEventListener('click', async (e)=>{
       e.preventDefault();
       const button = e.currentTarget;
       if (button.dataset.sort) {
         params.set('o', button.dataset.sort);
       } else {
-        params.set(button.dataset.filter, document.forms['createitem'].name.value);
+        if (button.dataset.filter === 'name') {
+          if (document.forms['createitem'].name.value) params.set('name', document.forms['createitem'].name.value);
+          else return;
+          button.classList.add('button-checked');
+          button.dataset.filter = '';
+        } else {
+          params.delete('name');
+          document.forms['createitem'].name.value = '';
+          button.classList.remove('button-checked');
+          button.dataset.filter = 'name';
+        }
       }
       content.replaceChildren();
       done_content.replaceChildren();
-      list();
+      list(content, done_content);
     })
   })
+
+  // Удвление всех отмеченных
+  document.getElementById('delete-items').addEventListener('click', async (e)=>{
+    const _formData = new FormData(e.currentTarget.form);
+    e.preventDefault();
+    for (let item of _formData.keys()) {
+      const resp = await fetch(url + '/' + item, {method: 'DELETE'});
+      if (resp.ok) document.querySelector(`div#done-content label[for="${item}"]`).remove();
+    }
+  });
 });

@@ -10,35 +10,49 @@ function createTag (tag, attrs={}) {
   return elem
 }
 
+/**
+ * Создание одного элемента списка в dom как в примере ниже
+ * <label class="item" for="29" title="Создано 2024-01-23T13:27:10.942335+05:00">
+ *   <input class="checkbox" type="checkbox" id="29"><span>Хлеб</span>
+ *   <button title="Удалить" class="btn-del"><i class="fa-light fa-xmark"></i></button>
+ *   <button title="Редактированть" class="btn-edt"><i class="fa-light fa-pen"></i></button>
+ * </label>
+ * @param {*} item - объект с данными элемента списка
+ * @param {*} content - родительский элемент, контейнер
+ */
 function addItem (item, content) {
-  let label = createTag('label', {class: 'item', for: item.id, title: "Создано " + item.created});
-  let input = createTag('input', {class: 'checkbox', type: 'checkbox', id: item.id});
-  input.checked = item.isdone;
-  done(input);
-  let span = createTag('span');
-  span.innerHTML = item.name;
-  label.appendChild(input);
-  label.appendChild(span);
+  // create elements
+  const label = createTag('label', {class: 'item', for: item.id, title: "Создано " + item.created}); // TODO: формат даты
+  const input = createTag('input', {class: 'checkbox', type: 'checkbox', id: item.id});
+  input.checked = item.isdone;  // state from database
+  const span = createTag('span');
+  span.innerText = item.name;   // visible text
   const button_del = createTag('button', {title: 'Удалить', class: 'btn-del'});
   button_del.innerHTML = '<i class="fa-light fa-xmark"></i>';
-  deleteHandler(button_del);
   const button_edt = createTag('button', {title: 'Редактированть', class: 'btn-edt'});
   button_edt.innerHTML = '<i class="fa-light fa-pen"></i>';
-  edit(button_edt);
-  label.appendChild(button_del);
+  // build structure
+  label.appendChild(input);
+  label.appendChild(span);
   label.appendChild(button_edt);
+  label.appendChild(button_del);
+  // Set handlers
+  doneHandler(input);
+  deleteHandler(button_del);
+  editHandler(button_edt);
+  // insert to container childs start position (prepend)
   content.prepend(label);
 }
 
 let content = undefined;
 let done_content = undefined;
 
-// Установка обработчика клик на задаче - выполнена
-function done(item) {
+// Установка обработчика клик на элементе списка (выполнена)
+function doneHandler(item) {
   item.addEventListener('click', async (e)=>{
       const data = {isdone: e.currentTarget.checked};
       const doneresp = await fetch(url + '/' + e.currentTarget.id, {
-        method: 'patch',
+        method: 'PATCH',
         headers: { "Content-Type": "application/json",},
         body: JSON.stringify(data),
       });
@@ -53,7 +67,7 @@ function deleteHandler(button) {
     });
 }
 // Обработчик редактирования
-function edit (button) {
+function editHandler (button) {
   button.addEventListener('click', async (e)=>{
       const _input = document.getElementById('i-1');
       _input.dataset.id = e.currentTarget.parentNode.getAttribute('for');
@@ -65,6 +79,23 @@ function edit (button) {
     });
 }
 
+// function setHandlers() {
+//   // обработчик щелчка на задаче
+//   document.querySelectorAll('label.item input').forEach(item => {
+//     doneHandler(item);
+//   });
+
+//   // хендлер удаления
+//   document.querySelectorAll('button.btn-del').forEach(button => {
+//     deleteHandler(button);
+//   });
+
+//   // редактирование
+//   document.querySelectorAll('button.btn-edt').forEach(button => {
+//     editHandler(button);
+//   });
+// }
+
 let params = new URLSearchParams(); // Для фильтра и сортировки
 // Заполнение списка покупок
 async function list () {
@@ -74,6 +105,7 @@ async function list () {
     if (item.isdone) addItem(item, done_content);
     else addItem(item, content);
   }
+  // setHandlers();
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -88,11 +120,11 @@ document.addEventListener("DOMContentLoaded", async () => {
   // Обработчик создания задачи (или редактирования, если есть dataset.id)
   document.forms['createitem'].addEventListener('submit', async (e)=>{
     const _form = e.currentTarget;
-    let method = 'post';
+    let method = 'POST';
     let _url = url;
     let id = _form.name.dataset.id;
     if (id) {
-      method = 'patch';
+      method = 'PATCH';
       _url = url + '/' + id;
     }
     e.preventDefault();

@@ -40,7 +40,7 @@ input.input-min {
   width: -webkit-fill-available;
   width: -moz-available;
   height: 1.6rem;
-  padding: 1rem .3rem 0 .5rem;
+  padding: 1rem 2.5rem 0 .5rem;
   transition: box-shadow 400ms 100ms, border-color 400ms 100ms;
   -webkit-transition: box-shadow 400ms 100ms, border-color 400ms 100ms;
 }
@@ -80,13 +80,12 @@ input.input-min:focus {
   position: relative;
 }
 .item span {
-  margin: 0 .3rem;
+  margin: 0 .3rem 0 0;
 }
 .item button {
   width: 2rem;
   height: 1.3rem;
   position: absolute;
-  top: .5rem;
   background-color: transparent;
   border: none;
 }
@@ -153,17 +152,37 @@ form[name=createitem]{
   cursor: pointer;
 }
 .buttons button.button-checked {
-  /* color: white;
-  background-color: #005b5b;
-  transition: background-color 300ms 50ms, color 300ms 50ms;
-  -webkit-transition: background-color 300ms 50ms, color 300ms 50ms; */
   box-shadow: inset 0 0 2px 0px black;
 }
-
 .buttons button:hover, .buttons button:focus {
   background-color: #005b5b10;
   color: #005b5b;
   transition: background-color 300ms 50ms, color 300ms 50ms;
   -webkit-transition: background-color 300ms 50ms, color 300ms 50ms;
   outline: none;
+}
+#modal {
+  background-color: ghostwhite;
+  border: 2px solid #008b8b;
+  border-radius: .5rem;
+  padding: 1rem;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  box-shadow: 0 0 3rem 0 grey;
+  text-align: center;
+  /* position: fixed;
+  display: none; */
+}
+#modal .modal-content {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+}
+#modal i {
+  display: block;
+  color: chocolate;
+}
+#modal span {
+  display: block;
+  font-size: 0.8rem;
+  padding: 0 .5rem 0.3rem;
 }

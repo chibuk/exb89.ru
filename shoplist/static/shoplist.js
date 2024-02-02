@@ -169,12 +169,46 @@ document.addEventListener("DOMContentLoaded", async () => {
   })
 
   // Удвление всех отмеченных
-  document.getElementById('delete-items').addEventListener('click', async (e)=>{
-    const _formData = new FormData(e.currentTarget.form);
+  document.getElementById('delete-items').addEventListener('click', (e)=>{
     e.preventDefault();
-    for (let item of _formData.keys()) {
-      const resp = await fetch(url + '/' + item, {method: 'DELETE'});
-      if (resp.ok) document.querySelector(`div#done-content label[for="${item}"]`).remove();
-    }
+    const dialog = document.querySelector('dialog#modal');
+    dialog.showModal();               // Отображаем модальное окно с вопросом
   });
+  
+  document.querySelector('dialog#modal').addEventListener('close', async ()=>{
+    const _formData = new FormData(document.forms['deleted-items']);
+    if (document.querySelector('dialog#modal').returnValue === "DEL") {
+      for (let item of _formData.keys()) {
+        const resp = await fetch(url + '/' + item, {method: 'DELETE'});
+        if (resp.ok) document.querySelector(`div#done-content label[for="${item}"]`).remove();
+      }
+    }
+  })
+
+    
+    
+    // Когда нажата кнопка...
+    // document.forms['modal'].dispatchEvent(new CustomEvent("deleteitems", {
+    //   detail: { items: _formData.keys() }
+    // }));
+    // for (let item of _formData.keys()) {
+    //   const resp = await fetch(url + '/' + item, {method: 'DELETE'});
+    //   if (resp.ok) document.querySelector(`div#done-content label[for="${item}"]`).remove();
+    // }
+
+  // В разработке...
+  // document.forms['modal'].addEventListener('delete-items', async (e)=>{
+  //   for (let item of e.detail.items) {
+  //     const resp = await fetch(url + '/' + item, {method: 'DELETE'});
+  //     if (resp.ok) document.querySelector(`div#done-content label[for="${item}"]`).remove();
+  //   }
+  // })
+
+  // Обновить списки
+  document.forms['deleted-items'].addEventListener('submit', (e)=>{
+    e.preventDefault();
+    content.replaceChildren();
+    done_content.replaceChildren();
+    list(content, done_content);
+  })
 });

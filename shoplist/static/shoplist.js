@@ -102,7 +102,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   document.forms['createitem'].addEventListener('submit', async (e)=>{
     e.preventDefault();
     const _form = e.currentTarget;
-    if (!_form.name.value) return;  // если пустое поле ввода
+    if (!_form.name.value.trim()) return;  // если пустое поле ввода
     let method = 'POST';
     let _url = url;
     let id = _form.name.dataset.id;
@@ -169,41 +169,32 @@ document.addEventListener("DOMContentLoaded", async () => {
   })
 
   // Удвление всех отмеченных
+  const dialog = document.querySelector('dialog#modal');
   document.getElementById('delete-items').addEventListener('click', (e)=>{
     e.preventDefault();
-    const dialog = document.querySelector('dialog#modal');
     dialog.showModal();               // Отображаем модальное окно с вопросом
   });
-  
-  document.querySelector('dialog#modal').addEventListener('close', async ()=>{
+  document.forms['modalform'].addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    dialog.close();
     const _formData = new FormData(document.forms['deleted-items']);
-    if (document.querySelector('dialog#modal').returnValue === "DEL") {
-      for (let item of _formData.keys()) {
-        const resp = await fetch(url + '/' + item, {method: 'DELETE'});
-        if (resp.ok) document.querySelector(`div#done-content label[for="${item}"]`).remove();
-      }
-    }
-  })
-
-    
-    
-    // Когда нажата кнопка...
-    // document.forms['modal'].dispatchEvent(new CustomEvent("deleteitems", {
-    //   detail: { items: _formData.keys() }
-    // }));
-    // for (let item of _formData.keys()) {
-    //   const resp = await fetch(url + '/' + item, {method: 'DELETE'});
-    //   if (resp.ok) document.querySelector(`div#done-content label[for="${item}"]`).remove();
-    // }
-
-  // В разработке...
-  // document.forms['modal'].addEventListener('delete-items', async (e)=>{
-  //   for (let item of e.detail.items) {
-  //     const resp = await fetch(url + '/' + item, {method: 'DELETE'});
-  //     if (resp.ok) document.querySelector(`div#done-content label[for="${item}"]`).remove();
-  //   }
-  // })
-
+    for (let item of _formData.keys()) {
+      const resp = await fetch(url + '/' + item, {method: 'DELETE'});
+      if (resp.ok) document.querySelector(`div#done-content label[for="${item}"]`).remove();
+    };
+  });
+  // Клик на свободной области для закрытия модального диалога
+  const handleModalClick = (event) => {
+    const modalRect = dialog.getBoundingClientRect();
+    if (
+      event.clientX < modalRect.left ||
+      event.clientX > modalRect.right ||
+      event.clientY < modalRect.top ||
+      event.clientY > modalRect.bottom
+    ) dialog.close();
+  };
+  dialog.addEventListener("click", handleModalClick);
+  
   // Обновить списки
   document.forms['deleted-items'].addEventListener('submit', (e)=>{
     e.preventDefault();

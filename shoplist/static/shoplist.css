@@ -186,3 +186,9 @@ form[name=createitem]{
   font-size: 0.8rem;
   padding: 0 .5rem 0.3rem;
 }
+body:has(dialog[open]) {
+  overflow: hidden;
+}
+dialog[open]::backdrop {
+    backdrop-filter: blur(2px);
+}

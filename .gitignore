@@ -1,3 +1,5 @@
 __pycache__ 
 /static
 migrations
+*.sqlite3
+djangoproject/settings_local.py

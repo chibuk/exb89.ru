@@ -1,0 +1,183 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+#global {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  min-width: 29rem;
+}
+
+header footer p {
+  font-family:serif;
+}
+
+
+
+
+header {
+  /* position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%; */
+  min-width: 29rem;
+  background-color: #FFFFFF;
+  height: 8.2rem;
+}
+
+.photo {
+  height: 6em;
+}
+
+.SHK {
+  font-weight: normal;
+}
+
+.big {
+  display: flex;
+}
+
+.katalog {
+  background-color: #3b549f;
+  width: 100%;
+  font-family: Georgia,serif;
+  padding: .4em .4em .4em .4em;
+  text-align: center;
+  white-space: nowrap;
+}
+
+A {
+  text-decoration: none;
+  color: #FFFFFF;
+  padding: .4em .8em;
+}
+A:hover {
+  transition: all 600ms;
+  background-color: #2e7fbf;
+}
+#dannoe {
+  background-color: #2e7fbf;
+}
+
+
+
+
+main {
+  text-align: center;
+}
+
+.forma-avto {
+  margin-top: 3rem;
+  text-align: center;
+}
+
+form {
+  text-align: center;
+  margin-top: 3rem;
+}
+form p {
+  margin-bottom: 1rem;
+  font-weight: bolder;
+  /* font-size: 1.5rem; */
+}
+
+input {
+  box-shadow: 0 0 4px black;
+  border: none;
+}
+input:focus {
+  outline-color:black;
+}
+
+textarea {
+  resize: none;
+  height: 6rem;
+  width: 11rem;
+  border: none;
+  box-shadow: 0 0 4px black;
+}
+textarea:focus {
+  outline-color: black;
+}
+
+
+
+.c-button {
+  -webkit-appearance: none; 
+    -moz-appearance: none;
+        appearance: none; /*сброс настроек чтоб было как в операционке*/
+  border: 0;  
+  border-radius: .5em;
+  background: #4676d7;
+  /*сброс стандартных стилей кнопка до 0 если бы: 
+  border: 0;  
+  border-radius: 0;
+  background: #ccc*/
+  color: white;
+  padding: .3em .6em;
+  font-size: .9em;
+  min-width: 5rem;
+  margin-top: 3rem;
+  
+}
+.c-button:hover {
+background-color: #365aa1;
+}
+.c-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 .2em #9fb7e9;
+}
+
+.h4 {
+  /* position: relative; */
+  color: black;
+  /* background-color: black; */
+  text-align: center;
+  /* width: 6rem; */
+  /* margin-left: 22rem; */
+  /* border-radius: .5em; */
+  margin: rem;
+}
+
+
+
+
+
+
+
+
+
+
+footer {
+  position: fixed;
+  width: 100%;
+  min-width: 29rem;
+  background-color: #cbcbcb;
+  bottom: 0px;
+  left: 0px;
+  padding: .3rem 1.5rem;
+  text-align: right;
+}
+
+.niz2 {
+  position: relative;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

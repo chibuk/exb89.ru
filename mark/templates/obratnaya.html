@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <title>Обратная связь</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/obratnaya.css' %}">
+  </head>
+  <body>
+
+<div id="conteyner">
+
+    <header>
+  
+      <div class="big">
+      
+
+              <div class="photoz">
+          
+                <img class="photo" src="{% static 'img/SHK.png' %}" alt="Эмблема школы ПЕРСПЕКТИВА">
+      
+              </div>
+          
+              <div class="text">
+                <p class="obrazov">
+                  Образование Ямала
+                </p>  
+      
+                <h3 class="SHK">
+                  МАОУ "СШ"ПЕРСПЕКТИВА"
+                </h3>
+      
+
+        
+        </div>
+      
+        
+      
+      </div>
+      
+      <div class="niz">
+        <div class="katalog">
+
+          <a href="{% url 'sgo' %}"><span>Главная</span></a>
+          <a href="{% url 'dnevnik' %}"><span>Дневник</span></a>
+          <a href="{% url 'otchoti' %}"><span>Отчёты</span></a>
+          <a id="dannoe" class="Obyavleniya" href="#"><span>Обратная связь</span></a>
+        </div>
+      
+        </div>
+
+      </header>
+
+    <main>
+        <h1 class="forma-avto">
+            Напишите нам
+          </h1>
+        <form>
+          
+      <label class="h4">
+          <p>
+                Имя
+          </p>
+          <input name="name" placeholder="Введите имя">
+          
+          <br>
+        </label>
+
+        <label class="h4">
+            
+            <p>  
+            Email
+            </p>  
+            
+              <input name="tema" placeholder="Введите вашу почту">
+        </label>
+            <br>
+            <label class="h4">
+              <p>
+                Сообщение
+              </p>
+                <textarea name="soobshe" placeholder="Введите сообщение"></textarea>
+            </label>
+          <br>
+          </form>
+            <button class="c-button" onclick="alert('Мы очень ценим ваш отзыв')">
+            Отправить
+          </button>
+    </main>
+
+    <footer>
+      <p class="niz2">Образование Ямала 5.32.74230.80
+        <br>
+        © 2007-2024 ИРТех, г. Самара. Все права защищены</p>
+      </footer>
+    </footer>
+
+
+
+
+
+</div>
+
+  </body>
+</html>

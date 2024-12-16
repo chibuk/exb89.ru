@@ -24,4 +24,5 @@ urlpatterns = [
     path('', index.views.index),
     path('range/', index.views.range),
     path('shoplist/', include('shoplist.urls')),
+    path('mark/', include('mark.urls')),
 ]

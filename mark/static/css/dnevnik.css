@@ -1,0 +1,171 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+#global {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  min-width: 29rem;
+}
+
+header footer p {
+  font-family:serif;
+}
+main p {
+  font-size: 1.1em;
+}
+
+
+
+header {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  min-width: 29rem;
+  background-color: #FFFFFF;
+  height: 8.2rem;
+  z-index: 10;
+}
+
+.photo {
+  height: 6em;
+}
+
+.SHK {
+  font-weight: normal;
+}
+
+.big {
+  display: flex;
+}
+
+.katalog {
+  background-color: #3b549f;
+  width: 100%;
+  font-family: Georgia,serif;
+  padding: .4em .4em .4em .4em;
+  text-align: center;
+  white-space: nowrap;
+}
+
+A {
+  text-decoration: none;
+  color: #FFFFFF;
+  padding: .4em .8em;
+}
+A:hover {
+  transition: all 600ms;
+  background-color: #2e7fbf;
+}
+#dannoe {
+  background-color: #2e7fbf;
+}
+
+
+
+
+
+main {
+  margin-top: 8.2rem;
+  margin-bottom: 4.9rem;
+  min-width: 29rem;
+}
+
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1em;
+  padding: 1em;
+}
+.cell {
+  width: 55em;
+  height: 25em;
+}
+
+table {
+  border: 1px dotted black;
+  width: 100%;
+  height: 100%;
+  margin-bottom: .2em;
+  border-collapse: collapse;
+  background-color: #f5f7ec;
+  overflow-wrap: break-word;
+}
+td, th {
+  overflow-wrap: break-word;
+  /* word-break: break-word; */
+}
+table td {
+  border: 1px dotted black;
+  padding: .5em;
+  white-space: nowrap;
+  background-color:white;
+}
+table th {
+  border: 1px dotted black;
+  font-weight: bold;
+  padding: .5em;
+}
+
+.Day{
+  background-color: #e5ebd0;
+}
+
+img.five {
+  position: relative;
+  left: 40%;
+  width: 1rem;
+  height: 1.4rem;
+}
+img.four {
+  position: relative;
+  left: 40%;
+  width: 1rem;
+  height: 1.4rem;
+}
+img.three {
+  position: relative;
+  left: 40%;
+  width: 1rem;
+  height: 1.4rem;
+}
+img.two {
+  position: relative;
+  left: 40%;
+  width: 1.1rem;
+  height: 1.4rem;
+}
+img.tochka {
+  position: relative;
+  left: 45%;
+  width: .6rem;
+  height: .6rem;
+}
+
+
+
+
+
+
+
+footer {
+  position: fixed;
+  width: 100%;
+  min-width: 29rem;
+  background-color: #cbcbcb;
+  bottom: 0px;
+  left: 0px;
+  padding: .3rem 1.5rem;
+  text-align: right;
+}
+
+.niz2 {
+  position: relative;
+}

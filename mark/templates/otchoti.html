@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <title>Отчёты</title>
+    {% load static %}
+    <link rel="stylesheet" href="{%static 'css/otchoti.css'%}">
+  </head>
+  <body>
+    <header>
+      <div class="big">
+      
+        <!-- <div class="verh"> -->
+              <div class="photoz">
+          
+                <img class="photo" src=" {% static 'img/SHK.png' %}" alt="Эмблема школы ПЕРСПЕКТИВА">
+      
+              </div>
+          
+              <div class="text">
+                <p class="obrazov">
+                  Образование Ямала
+                </p>  
+      
+                <h3 class="SHK">
+                  МАОУ "СШ"ПЕРСПЕКТИВА"
+                </h3>
+      
+              <!-- </div> -->
+        
+        </div>
+      
+        
+      
+      </div>
+      
+      <div class="niz">
+          <div class="katalog">
+            <!-- каталог -->
+            <a href=" {% url 'sgo' %} "><span>Главная</span></a>
+            <a href="{% url 'dnevnik' %}"><span>Дневник</span></a>
+            <a id="dannoe" href="#"><span>Отчёты</span></a>
+            <a class="Obyavleniya" href="{% url 'obratnaya' %}"><span>Обратная связь</span></a>
+          </div>
+        </div>
+    </header>
+    <main>
+  <div class="flex">
+    <div class="coll">
+      <table>
+      <tr>
+        <th>Предмет</th>
+        <th>1 четверть</th>
+        <th>2 четверть</th>
+        <th>3 четверть</th>
+        <th>4 четверть</th>
+        <th>Итог</th>  
+      </tr>
+      <tr>
+        <td>Вероятность и статистика</td>
+        <td>4</td>
+        <td>3</td>
+        <td>2</td>
+        <td>5</td>
+        <td>4</td>
+      </tr>
+      <tr>
+        <td>История России. Всеобщая история</td>
+        <td>5</td>
+        <td>5</td>
+        <td>4</td>
+        <td>3</td>
+        <td>4</td>
+      </tr>
+      <tr>
+        <td>Основы безопасности и защиты Родины</td>
+        <td>4</td>
+        <td>3</td>
+        <td>5</td>
+        <td>4</td>
+        <td>4</td>
+      </tr>
+      <tr>
+        <td>Биология</td>
+        <td>4</td>
+        <td>4</td>
+        <td>3</td>
+        <td>2</td>
+        <td>3</td>
+      </tr>
+      <tr>
+        <td>Физика</td>
+        <td>4</td>
+        <td>3</td>
+        <td>2</td>
+        <td>5</td>
+        <td>4</td>
+      </tr>
+      <tr>
+        <td>Обществознание</td>
+        <td>5</td>
+        <td>4</td>
+        <td>5</td>
+        <td>4</td>
+        <td>5</td>
+      </tr>
+      <tr>
+        <td>География</td>
+        <td>4</td>
+        <td>4</td>
+        <td>3</td>
+        <td>5</td>
+        <td>4</td>
+      </tr>
+      <tr>
+        <td>Музыка</td>
+        <td>5</td>
+        <td>5</td>
+        <td>5</td>
+        <td>4</td>
+        <td>5</td>
+      </tr>
+      <tr>
+        <td>Физическая культура	</td>
+        <td>5</td>
+        <td>5</td>
+        <td>5</td>
+        <td>5</td>
+        <td>5</td>
+      </tr>
+      <tr>
+        <td>Развитие математических способнностей</td>
+        <td>зач</td>
+        <td>зач</td>
+        <td>зач</td>
+        <td>зач</td>
+        <td>зач</td>
+      </tr>
+      <tr>
+        <td>Алгебра</td>
+        <td>3</td>
+        <td>3</td>
+        <td>5</td>
+        <td>2</td>
+        <td>3</td>
+      </tr>
+      <tr>
+        <td>Геометрия</td>
+        <td>4</td>
+        <td>4</td>
+        <td>3</td>
+        <td>5</td>
+        <td>4</td>
+      </tr>
+      <tr>
+        <td>Информатика</td>
+        <td>4</td>
+        <td>4</td>
+        <td>5</td>
+        <td>4</td>
+        <td>4</td>
+      </tr>
+      <tr>
+        <td>Труд</td>
+        <td>5</td>
+        <td>5</td>
+        <td>4</td>
+        <td>5</td>
+        <td>5</td>
+      </tr>
+      <tr>
+        <td>Русский язык</td>
+        <td>5</td>
+        <td>5</td>
+        <td>4</td>
+        <td>3</td>
+        <td>4</td>
+      </tr>
+      <tr>
+        <td>Английский Язык	</td>
+        <td>3</td>
+        <td>4</td>
+        <td>5</td>
+        <td>3</td>
+        <td>4</td>
+      </tr>      
+      <tr>
+        <td>Литература</td>
+        <td>5</td>
+        <td>5</td>
+        <td>3</td>
+        <td>4</td>
+        <td>4</td>
+      </tr>
+      <tr>
+        <td>Русская родная литература</td>
+        <td>зач</td>
+        <td>зач</td>
+        <td>зач</td>
+        <td>зач</td>
+        <td>зач</td>
+      </tr>
+      <tr>
+        <td>Русский родной язык</td>
+        <td>4</td>
+        <td>зач</td>
+        <td>зач</td>
+        <td>зач</td>
+        <td>зач</td>
+      </tr>
+      </table>
+    </div>
+  </div>
+
+
+
+
+
+    </main>
+    <footer>
+      <p class="niz2">Образование Ямала 5.32.74230.80
+        <br>
+        © 2007-2024 ИРТех, г. Самара. Все права защищены</p>
+    </footer>
+
+  </body>
+</html>

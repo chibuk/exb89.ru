@@ -12,8 +12,8 @@ function createTag (tag, attrs={}) {
 
 /**
  * Создание одного элемента списка в dom как в примере ниже
+ * <input class="checkbox" type="checkbox" id="29"><span>Хлеб</span>
  * <label class="item" for="29" title="Создано 2024-01-23T13:27:10.942335+05:00">
- *   <input class="checkbox" type="checkbox" id="29"><span>Хлеб</span>
  *   <button title="Удалить" class="btn-del"><i class="fa-light fa-xmark"></i></button>
  *   <button title="Редактированть" class="btn-edt"><i class="fa-light fa-pen"></i></button>
  * </label>
@@ -33,7 +33,7 @@ function addItem (item, content) {
   const button_edt = createTag('button', {title: 'Редактированть', class: 'btn-edt'});
   button_edt.innerHTML = '<i class="fa-light fa-pen"></i>';
   // build structure
-  label.appendChild(input);
+  // label.appendChild(input);
   label.appendChild(span);
   label.appendChild(button_edt);
   label.appendChild(button_del);
@@ -43,6 +43,7 @@ function addItem (item, content) {
   editHandler(button_edt);
   // insert to container childs start position (prepend)
   content.prepend(label);
+  content.prepend(input);
 }
 
 // Установка обработчика клик на элементе списка (выполнена)
@@ -77,7 +78,7 @@ function editHandler (button) {
     });
 }
 
-let params = new URLSearchParams(); // Для фильтра и сортировки
+let params = new URLSearchParams(window.location.search);
 // Заполнение списка покупок
 async function list (content, done_content) {
   const _url = (params.toString()) ? url + '?' + params.toString() : url;
@@ -106,11 +107,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     let method = 'POST';
     let _url = url;
     let id = _form.name.dataset.id;
+    const data = {name: _form.name.value};
     if (id) {
       method = 'PATCH';
       _url = url + '/' + id;
-    }
-    const data = {name: _form.name.value};
+    } else data['list_name'] = params.get('list_name');
+    // const data = {name: _form.name.value};
     const addresp = await fetch(_url, {
       method: method,
       headers: { "Content-Type": "application/json",},

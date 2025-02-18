@@ -127,8 +127,9 @@ input.input-min:focus {
   accent-color: var(--color);
   display: none;
 }
-.checkbox:checked + span {
+.checkbox:checked + .item {
   text-decoration: line-through;
+  background-color: rgba(0,0,0,.1);
 }
 div#done-content .item{
   box-shadow: 0px 0px 3px 0px gray;

@@ -111,7 +111,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (id) {
       method = 'PATCH';
       _url = url + '/' + id;
-    } else data['list_name'] = params.get('list_name');
+    } else data['list_name'] = (params.get('list_name') || '') ;
     // const data = {name: _form.name.value};
     const addresp = await fetch(_url, {
       method: method,

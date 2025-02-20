@@ -12,7 +12,7 @@ class ListItem(models.Model):
     modified = models.DateTimeField("Последнее изменение", auto_now=True)
     # deleted = models.DateTimeField("Дата удаления", auto_now_add=True) # поле не нужно т.к.,
     # если isdeleted=True, то modified укажет дату удаления. Помеченные на удаление редактировать будет нельзя.
-    list_name = models.CharField("Список", max_length=50, default='') # наименование списка, к которому относится элемент
+    list_name = models.CharField("Список", max_length=50, default='', blank=True) # наименование списка, к которому относится элемент
 
     class Meta:
         verbose_name = "Элемент списка покупок"

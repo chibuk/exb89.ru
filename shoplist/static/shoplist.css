@@ -10,27 +10,21 @@ body {
 .flex-container {
   display: flex;
   flex-flow: row wrap;
-  align-items: baseline;
+  gap: 1em;
   justify-content: center;
   max-width: 65rem;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 3px auto;
   background-color: white;
   box-shadow: 0px 0px 1px black;
 }
 .flex-container-child {
   min-width: 360px;
   max-width: 30rem;
+  width: 30rem;
   margin: 5px;
 }
-h1 {
-  font: bold 1.3rem "Tahoma", sans-serif;
-  color: var(--h1-color);
-  padding: 0 .5rem;
-  text-align: center;
-}
 .input-out {
-  margin: 1rem 0 .5rem;
+  margin: .5rem 0;
   display: block;
   background-color: white;
   position: relative;
@@ -40,8 +34,9 @@ h1 {
   font-size: .9rem;
   color:  #666;
   position: absolute;
-  padding: .1rem 0 0 .6rem;
+  padding: .5rem 0 0 1rem;
   cursor: text;
+  pointer-events: none; /* Чтобы метка не мешала вводить текст */
 }
 input.input-min {
   font-size: 1rem;
@@ -50,7 +45,7 @@ input.input-min {
   width: -webkit-fill-available;
   width: -moz-available;
   height: 1.6rem;
-  padding: 1rem 2.5rem 0 .5rem;
+  padding: 1.5rem 2.5rem .5rem 1rem;
   transition: box-shadow 400ms 100ms, border-color 400ms 100ms;
   -webkit-transition: box-shadow 400ms 100ms, border-color 400ms 100ms;
 }
@@ -67,7 +62,7 @@ input.input-min:focus {
   color: var(--color);
   background-color: white;
   position: absolute;
-  top: .2rem;
+  top: .7rem;
   right: .2rem;
 }
 .button:hover, .button:focus {
@@ -82,7 +77,7 @@ input.input-min:focus {
   color:#333;
   box-shadow: 0px 0px 3px 0px var(--color);
   border-radius: .5rem;
-  padding: .5rem 3.5rem .5rem .5rem;
+  padding: 1rem 3.5rem 1rem 1rem;
   display: block;
   cursor: pointer;
   margin-top: .7rem;
